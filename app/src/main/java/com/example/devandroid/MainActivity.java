@@ -1,13 +1,11 @@
 package com.example.devandroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.devandroid.utils.UtilsDB;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ParentNavigationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

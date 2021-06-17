@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="match_parent">
+
+<!-- тут всё поменять   -->
+    <Button
+        android:id="@+id/btn_contacts"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/btn_contacts_txt"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/btn_pets"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/btn_pets_txt"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/btn_aviaries"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/btn_aviaries_txt"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+
+</LinearLayout>

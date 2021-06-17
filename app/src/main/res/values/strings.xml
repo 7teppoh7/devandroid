@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">DevAndroid</string>
+    <string name="app_name">Приют «Второй Шанс»</string>
+    <string name="btn_contacts_txt">Контакты</string>
+    <string name="btn_pets_txt">Питомцы</string>
+    <string name="btn_aviaries_txt">Вольеры</string>
+    <string name="header_news">События</string>
+    <string name="date_txt_example">10 мая 2021 года</string>
+    <string name="text_example">В наш приют была принята собака по имени Лайка. Она находится в вольере под номером 5.</string>
 </resources>
