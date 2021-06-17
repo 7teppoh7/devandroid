@@ -27,7 +27,7 @@ public class UtilsDB {
                     "date_in TEXT," +
                     "date_out TEXT," +
                     "FOREIGN KEY (state) REFERENCES state_animal(name)," +
-                    "FOREIGN KEY (aviary) REFERENCES aviary(id))");
+                    "FOREIGN KEY (aviary_id) REFERENCES aviary(id))");
             db.execSQL("CREATE TABLE IF NOT EXISTS event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                     "type_event TEXT NOT NULL," +
                     "id_dog INTEGER NOT NULL," +

@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SQLiteDatabase db = this.openOrCreateDatabase("shelter.db", MODE_PRIVATE, null);
         UtilsDB.initDb(this);
     }
 }
