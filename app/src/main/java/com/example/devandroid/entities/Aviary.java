@@ -2,15 +2,17 @@ package com.example.devandroid.entities;
 
 public class Aviary {
     int id;
-    String type;
+    TypeAviary type;
+    String name;
     int capacity;
 
     public Aviary() {
     }
 
-    public Aviary(int id, String type, int capacity) {
+    public Aviary(int id, TypeAviary type, String name, int capacity) {
         this.id = id;
         this.type = type;
+        this.name = name;
         this.capacity = capacity;
     }
 
@@ -22,12 +24,20 @@ public class Aviary {
         this.id = id;
     }
 
-    public String getType() {
+    public TypeAviary getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeAviary type) {
         this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getCapacity() {
@@ -42,7 +52,8 @@ public class Aviary {
     public String toString() {
         return "Aviary{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
+                ", type=" + type +
+                ", name='" + name + '\'' +
                 ", capacity=" + capacity +
                 '}';
     }

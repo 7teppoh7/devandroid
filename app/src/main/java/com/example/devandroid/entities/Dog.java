@@ -14,6 +14,13 @@ public class Dog {
 
     public Dog(){}
 
+    public Dog(int id, String name, String photo, int age){
+        this.id = id;
+        this.name = name;
+        this.photo = photo;
+        this.age = age;
+    }
+
     public Dog(int id, StateAnimal state, Aviary aviary, String name, String photo, int age, Date dateIn, Date dateOut) {
         this.id = id;
         this.state = state;
