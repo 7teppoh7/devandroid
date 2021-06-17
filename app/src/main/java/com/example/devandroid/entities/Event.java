@@ -1,16 +1,20 @@
 package com.example.devandroid.entities;
 
-import java.sql.Date;
-
 public class Event {
     int id;
     TypeEvent type;
     Dog dog;
-    Date date;
+    String date;
 
     public Event(){}
 
-    public Event(int id, TypeEvent type, Dog dog, Date date) {
+    public Event(TypeEvent type, Dog dog, String date) {
+        this.type = type;
+        this.dog = dog;
+        this.date = date;
+    }
+
+    public Event(int id, TypeEvent type, Dog dog, String date) {
         this.id = id;
         this.type = type;
         this.dog = dog;
@@ -41,11 +45,11 @@ public class Event {
         this.dog = dog;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
