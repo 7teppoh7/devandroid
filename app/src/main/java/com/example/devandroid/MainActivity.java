@@ -1,8 +1,5 @@
 package com.example.devandroid;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,10 +19,7 @@ import com.example.devandroid.services.TypeEventService;
 import com.example.devandroid.utils.UtilsCalendar;
 import com.example.devandroid.utils.UtilsDB;
 
-import java.text.ParseException;
-import java.util.Date;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ParentNavigationActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
