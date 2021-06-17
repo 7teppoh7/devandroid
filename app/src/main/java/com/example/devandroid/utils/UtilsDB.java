@@ -3,6 +3,12 @@ package com.example.devandroid.utils;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.devandroid.entities.TypeAviary;
+import com.example.devandroid.entities.TypeEvent;
+import com.example.devandroid.services.StateAnimalService;
+import com.example.devandroid.services.TypeAviaryService;
+import com.example.devandroid.services.TypeEventService;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class UtilsDB {
@@ -63,6 +69,16 @@ public class UtilsDB {
     }
 
     public static void doMigrate(Context context){
+        SQLiteDatabase db = context.openOrCreateDatabase("shelter.db", MODE_PRIVATE, null);
+        TypeEventService typeEventService = new TypeEventService();
+        TypeAviaryService typeAviaryService = new TypeAviaryService();
+        StateAnimalService stateAnimalService = new StateAnimalService();
+        typeEventService.add(db, "Event");
 
+        typeAviaryService.add(db, "Aggressive");
+        typeAviaryService.add(db, "Patient");
+
+        stateAnimalService.add(db, "Home");
+        stateAnimalService.add(db, "Shelter");
     }
 }
