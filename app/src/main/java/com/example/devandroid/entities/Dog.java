@@ -1,7 +1,5 @@
 package com.example.devandroid.entities;
 
-import java.sql.Date;
-
 public class Dog {
     int id;
     StateAnimal state;
@@ -9,10 +7,18 @@ public class Dog {
     String name;
     String photo;
     int age;
-    Date dateIn;
-    Date dateOut;
+    String dateIn;
+    String dateOut;
 
     public Dog(){}
+
+    public Dog(String name, String photo, int age, String dateIn, String dateOut) {
+        this.name = name;
+        this.photo = photo;
+        this.age = age;
+        this.dateIn = dateIn;
+        this.dateOut = dateOut;
+    }
 
     public Dog(int id, String name, String photo, int age){
         this.id = id;
@@ -21,7 +27,7 @@ public class Dog {
         this.age = age;
     }
 
-    public Dog(int id, StateAnimal state, Aviary aviary, String name, String photo, int age, Date dateIn, Date dateOut) {
+    public Dog(int id, StateAnimal state, Aviary aviary, String name, String photo, int age, String dateIn, String dateOut) {
         this.id = id;
         this.state = state;
         this.aviary = aviary;
@@ -80,19 +86,19 @@ public class Dog {
         this.age = age;
     }
 
-    public Date getDateIn() {
+    public String getDateIn() {
         return dateIn;
     }
 
-    public void setDateIn(Date dateIn) {
+    public void setDateIn(String dateIn) {
         this.dateIn = dateIn;
     }
 
-    public Date getDateOut() {
+    public String getDateOut() {
         return dateOut;
     }
 
-    public void setDateOut(Date dateOut) {
+    public void setDateOut(String dateOut) {
         this.dateOut = dateOut;
     }
 

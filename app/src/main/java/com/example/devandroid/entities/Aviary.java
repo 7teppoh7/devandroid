@@ -9,6 +9,12 @@ public class Aviary {
     public Aviary() {
     }
 
+    public Aviary(TypeAviary type, String name, int capacity) {
+        this.type = type;
+        this.name = name;
+        this.capacity = capacity;
+    }
+
     public Aviary(int id, TypeAviary type, String name, int capacity) {
         this.id = id;
         this.type = type;
