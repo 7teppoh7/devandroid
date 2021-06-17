@@ -14,13 +14,13 @@ public class UtilsDB {
             db.execSQL("CREATE TABLE IF NOT EXISTS type_aviary (name TEXT PRIMARY KEY NOT NULL)");
             db.execSQL("CREATE TABLE IF NOT EXISTS type_event (name TEXT PRIMARY KEY NOT NULL)");
             db.execSQL("CREATE TABLE IF NOT EXISTS aviary (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                    "type_aviary TEXT," +
+                    "type_aviary TEXT NOT NULL," +
                     "name TEXT," +
                     "capacity INTEGER," +
                     "FOREIGN KEY (type_aviary) REFERENCES type_aviary(name))");
             db.execSQL("CREATE TABLE IF NOT EXISTS dogs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    "state TEXT," +
-                    "aviary_id INTEGER," +
+                    "state TEXT NOT NULL," +
+                    "aviary_id INTEGER NOT NULL," +
                     "name TEXT," +
                     "photo TEXT," +
                     "age INTEGER," +
@@ -29,8 +29,8 @@ public class UtilsDB {
                     "FOREIGN KEY (state) REFERENCES state_animal(name)," +
                     "FOREIGN KEY (aviary) REFERENCES aviary(id))");
             db.execSQL("CREATE TABLE IF NOT EXISTS event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                    "type_event TEXT," +
-                    "id_dog INTEGER," +
+                    "type_event TEXT NOT NULL," +
+                    "id_dog INTEGER NOT NULL," +
                     "date TEXT," +
                     "FOREIGN KEY (type_event) REFERENCES type_event(name)," +
                     "FOREIGN KEY (id_dog) REFERENCES dogs(id))");
