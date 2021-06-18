@@ -1,10 +1,14 @@
 package com.example.devandroid.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aviary {
-    int id;
-    TypeAviary type;
-    String name;
-    int capacity;
+    private int id;
+    private TypeAviary type;
+    private String name;
+    private int capacity;
+    private List<Dog> dogs = new ArrayList<>();
 
     public Aviary() {
     }
@@ -20,6 +24,18 @@ public class Aviary {
         this.type = type;
         this.name = name;
         this.capacity = capacity;
+    }
+
+    public void addDog(Dog dog){
+        dogs.add(dog);
+    }
+
+    public List<Dog> getDogs() {
+        return dogs;
+    }
+
+    public void setDogs(List<Dog> dogs) {
+        this.dogs = dogs;
     }
 
     public int getId() {
@@ -61,6 +77,7 @@ public class Aviary {
                 ", type=" + type +
                 ", name='" + name + '\'' +
                 ", capacity=" + capacity +
+                ", dogs=" + dogs +
                 '}';
     }
 }

@@ -12,6 +12,7 @@ import com.example.devandroid.entities.StateAnimal;
 import com.example.devandroid.entities.TypeAviary;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,9 +20,16 @@ import java.util.List;
 import java.util.Locale;
 
 public class AviaryService {
+    private SQLiteDatabase db;
+
+    public AviaryService(SQLiteDatabase db) {
+        this.db = db;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public List<Aviary> getAll(SQLiteDatabase db){
-        TypeAviaryService service = new TypeAviaryService();
+    public List<Aviary> getAll() throws ParseException {
+        TypeAviaryService service = new TypeAviaryService(db);
+        DogService dogService = new DogService(db);
         List<Aviary> aviaries = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM aviary", null);
         cursor.moveToFirst();
@@ -31,7 +39,7 @@ public class AviaryService {
             String name = cursor.getString(2);
             int capacity = cursor.getInt(3);
 
-            Aviary aviary = new Aviary(id, service.getByName(db, type), name, capacity);
+            Aviary aviary = new Aviary(id, service.getByName(type), name, capacity);
             aviaries.add(aviary);
             cursor.moveToNext();
         }
@@ -40,8 +48,8 @@ public class AviaryService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Aviary getById(SQLiteDatabase db, int id){
-        List<Aviary> aviaries = getAll(db);
+    public Aviary getById(int id) throws ParseException {
+        List<Aviary> aviaries = getAll();
         return aviaries.stream()
                 .filter(x -> x.getId() == id)
                 .findFirst()
@@ -49,25 +57,27 @@ public class AviaryService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Aviary getLastElement(SQLiteDatabase db){
-        List<Aviary> aviaries = getAll(db);
+    public Aviary getLastElement() throws ParseException {
+        List<Aviary> aviaries = getAll();
         return aviaries.get(aviaries.size()-1);
     }
 
-    public void add(SQLiteDatabase db, Aviary aviary){
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void add(Aviary aviary) throws ParseException {
         db.execSQL("INSERT INTO aviary VALUES (?,?,?,?)", new Object[]{null,aviary.getType().getName(), aviary.getName(), aviary.getCapacity()});
+        aviary.setId(getLastElement().getId());
     }
 
-    public void update(SQLiteDatabase db, Aviary aviary){
+    public void update(Aviary aviary){
         db.execSQL("UPDATE aviary SET type_aviary = ?, name = ?, capacity = ? WHERE id = ?",
                 new Object[]{aviary.getType().getName(), aviary.getName(), aviary.getCapacity(), aviary.getId()});
     }
 
-    public void delete(SQLiteDatabase db, Aviary aviary){
+    public void delete(Aviary aviary){
         db.execSQL("DELETE FROM aviary WHERE id = ?", new Object[]{aviary.getId()});
     }
 
-    public void deleteAll(SQLiteDatabase db){
+    public void deleteAll(){
         db.execSQL("DELETE FROM aviary");
     }
 }

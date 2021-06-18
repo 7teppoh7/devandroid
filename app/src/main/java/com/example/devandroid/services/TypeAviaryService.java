@@ -13,7 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TypeAviaryService {
-    public List<TypeAviary> getAll(SQLiteDatabase db){
+    private SQLiteDatabase db;
+
+    public TypeAviaryService(SQLiteDatabase db) {
+        this.db = db;
+    }
+
+    public List<TypeAviary> getAll(){
         List<TypeAviary> list = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM type_aviary", null);
         cursor.moveToFirst();
@@ -27,25 +33,32 @@ public class TypeAviaryService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public TypeAviary getByName(SQLiteDatabase db, String name){
-        return getAll(db).stream()
+    public TypeAviary getByName(String name){
+        return getAll().stream()
                 .filter(x -> x.getName().equals(name)).findFirst()
                 .orElse(null);
     }
 
-    public void add(SQLiteDatabase db, String name){
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public TypeAviary getFirstElement(){
+        return getAll().stream()
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void add(String name){
         db.execSQL("INSERT INTO type_aviary VALUES (?)", new Object[]{name});
     }
 
-    public void update(SQLiteDatabase db, String prev, String name){
+    public void update(String prev, String name){
         db.execSQL("UPDATE type_aviary SET name = ? WHERE name = ?", new Object[]{name, prev});
     }
 
-    public void delete(SQLiteDatabase db, String name){
+    public void delete(String name){
         db.execSQL("DELETE FROM type_aviary WHERE name = ?", new Object[]{name});
     }
 
-    public void deleteAll(SQLiteDatabase db){
+    public void deleteAll(){
         db.execSQL("DELETE FROM type_aviary");
     }
 }
