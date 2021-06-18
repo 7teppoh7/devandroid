@@ -1,5 +1,7 @@
 package com.example.devandroid.entities;
 
+import java.util.Objects;
+
 public class Dog {
     private int id;
     private StateAnimal state;
@@ -103,5 +105,18 @@ public class Dog {
                 ", dateIn=" + dateIn +
                 ", dateOut=" + dateOut +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dog dog = (Dog) o;
+        return id == dog.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

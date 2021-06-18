@@ -30,25 +30,20 @@ public class EventService {
         List<Event> events = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM event", null);
         cursor.moveToFirst();
-        try {
-            for (int i = 0; i < cursor.getCount(); i++){
-                int id = cursor.getInt(0);
-                String type = cursor.getString(1);
-                int dog = cursor.getInt(2);
-                String dateFromDb = cursor.getString(3);
-                Date date = UtilsCalendar.parser.parse(dateFromDb);
-                Event event = new Event();
-                event.setId(id);
-                event.setType(service.getByName(type));
-                event.setDog(dogService.getById(dog));
-                event.setDate(UtilsCalendar.formatter.format(date));
-                events.add(event);
-                cursor.moveToNext();
-            }
-            cursor.close();
-        }catch (ParseException e){
-            e.printStackTrace();
+        for (int i = 0; i < cursor.getCount(); i++){
+            int id = cursor.getInt(0);
+            String type = cursor.getString(1);
+            int dog = cursor.getInt(2);
+            String dateFromDb = cursor.getString(3);
+            Event event = new Event();
+            event.setId(id);
+            event.setType(service.getByName(type));
+            event.setDog(dogService.getById(dog));
+            event.setDate(dateFromDb);
+            events.add(event);
+            cursor.moveToNext();
         }
+        cursor.close();
         UtilsDB.closeConnection(db);
         return events;
     }

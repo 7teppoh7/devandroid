@@ -101,4 +101,11 @@ public class AviaryService {
         db.execSQL("DELETE FROM aviary");
         UtilsDB.closeConnection(db);
     }
+
+    public Aviary findByDog(Dog dog) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return getAll().stream().filter(aviary -> aviary.getDogs().contains(dog)).findFirst().orElse(new Aviary());
+        }
+        return new Aviary();
+    }
 }

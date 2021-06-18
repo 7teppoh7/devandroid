@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="300dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#E6E8E6">
 
-<!-- тут всё поменять   -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        />
+
     <Button
         android:id="@+id/btn_contacts"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:textAllCaps="false"
         android:text="@string/btn_contacts_txt"
         android:backgroundTint="@color/teal_700"
@@ -18,7 +28,7 @@
     <Button
         android:id="@+id/btn_pets"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:textAllCaps="false"
         android:text="@string/btn_pets_txt"
         android:backgroundTint="@color/teal_700"
@@ -29,7 +39,7 @@
     <Button
         android:id="@+id/btn_aviaries"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:textAllCaps="false"
         android:text="@string/btn_aviaries_txt"
         android:backgroundTint="@color/teal_700"
