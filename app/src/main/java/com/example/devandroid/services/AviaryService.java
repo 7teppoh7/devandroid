@@ -25,7 +25,7 @@ public class AviaryService {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<Aviary> getAll(){
         SQLiteDatabase db = UtilsDB.openConnection();
-        TypeAviaryService service = new TypeAviaryService(db);
+        TypeAviaryService service = new TypeAviaryService();
         DogService dogService = new DogService();
         List<Aviary> aviaries = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM aviary", null);
