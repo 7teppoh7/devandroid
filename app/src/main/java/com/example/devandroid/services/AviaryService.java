@@ -10,6 +10,7 @@ import com.example.devandroid.entities.Aviary;
 import com.example.devandroid.entities.Dog;
 import com.example.devandroid.entities.StateAnimal;
 import com.example.devandroid.entities.TypeAviary;
+import com.example.devandroid.utils.UtilsDB;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -18,18 +19,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class AviaryService {
-    private SQLiteDatabase db;
-
-    public AviaryService(SQLiteDatabase db) {
-        this.db = db;
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public List<Aviary> getAll() throws ParseException {
+    public List<Aviary> getAll(){
+        SQLiteDatabase db = UtilsDB.openConnection();
         TypeAviaryService service = new TypeAviaryService(db);
-        DogService dogService = new DogService(db);
+        DogService dogService = new DogService();
         List<Aviary> aviaries = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM aviary", null);
         cursor.moveToFirst();
@@ -38,17 +35,33 @@ public class AviaryService {
             String type = cursor.getString(1);
             String name = cursor.getString(2);
             int capacity = cursor.getInt(3);
-
             Aviary aviary = new Aviary(id, service.getByName(type), name, capacity);
+            aviary.setDogs(dogService.getAllByAviaryId(id));
             aviaries.add(aviary);
             cursor.moveToNext();
         }
         cursor.close();
+        UtilsDB.closeConnection(db);
         return aviaries;
     }
 
+    public void addDog(Aviary aviary, Dog dog){
+        SQLiteDatabase db = UtilsDB.openConnection();
+        db.execSQL("INSERT INTO dog_aviary VALUES (?,?)", new Object[]{dog.getId(), aviary.getId()});
+        aviary.addDog(dog);
+        UtilsDB.closeConnection(db);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Aviary getById(int id) throws ParseException {
+    public void deleteDog(Aviary aviary, Dog dog){
+        SQLiteDatabase db = UtilsDB.openConnection();
+        db.execSQL("DELETE FROM dog_aviary WHERE id_aviary = ? AND id_dog = ?", new Object[]{aviary.getId(), dog.getId()});
+        aviary.getDogs().removeIf(x -> x.getId() == dog.getId());
+        UtilsDB.closeConnection(db);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Aviary getById(int id) {
         List<Aviary> aviaries = getAll();
         return aviaries.stream()
                 .filter(x -> x.getId() == id)
@@ -57,27 +70,35 @@ public class AviaryService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Aviary getLastElement() throws ParseException {
+    public Aviary getLastElement() {
         List<Aviary> aviaries = getAll();
         return aviaries.get(aviaries.size()-1);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void add(Aviary aviary) throws ParseException {
+    public void add(Aviary aviary) {
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("INSERT INTO aviary VALUES (?,?,?,?)", new Object[]{null,aviary.getType().getName(), aviary.getName(), aviary.getCapacity()});
         aviary.setId(getLastElement().getId());
+        UtilsDB.closeConnection(db);
     }
 
     public void update(Aviary aviary){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("UPDATE aviary SET type_aviary = ?, name = ?, capacity = ? WHERE id = ?",
                 new Object[]{aviary.getType().getName(), aviary.getName(), aviary.getCapacity(), aviary.getId()});
+        UtilsDB.closeConnection(db);
     }
 
     public void delete(Aviary aviary){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("DELETE FROM aviary WHERE id = ?", new Object[]{aviary.getId()});
+        UtilsDB.closeConnection(db);
     }
 
     public void deleteAll(){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("DELETE FROM aviary");
+        UtilsDB.closeConnection(db);
     }
 }

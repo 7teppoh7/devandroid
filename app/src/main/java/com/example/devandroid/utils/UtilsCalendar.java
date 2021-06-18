@@ -11,7 +11,7 @@ public class UtilsCalendar {
     public static final SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH);
     public static final SimpleDateFormat formatter = new SimpleDateFormat("d MMM (EEEE) ''yy в HH:mm", Locale.forLanguageTag("ru"));
 
-    public static String getTestExample() throws ParseException {
+    public static String getTestExample(){
         return "2000-10-10 10:10:10.000";
     }
 }

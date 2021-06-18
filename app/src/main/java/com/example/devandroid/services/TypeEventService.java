@@ -7,18 +7,14 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.example.devandroid.entities.TypeEvent;
+import com.example.devandroid.utils.UtilsDB;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TypeEventService {
-    private SQLiteDatabase db;
-
-    public TypeEventService(SQLiteDatabase db) {
-        this.db = db;
-    }
-
     public List<TypeEvent> getAll(){
+        SQLiteDatabase db = UtilsDB.openConnection();
         List<TypeEvent> list = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM type_event", null);
         cursor.moveToFirst();
@@ -28,6 +24,7 @@ public class TypeEventService {
             cursor.moveToNext();
         }
         cursor.close();
+        UtilsDB.closeConnection(db);
         return list;
     }
 
@@ -39,18 +36,26 @@ public class TypeEventService {
     }
 
     public void add(String name){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("INSERT INTO type_event VALUES (?)", new Object[]{name});
+        UtilsDB.closeConnection(db);
     }
 
     public void update(String prev, String name){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("UPDATE type_event SET name = ? WHERE name = ?", new Object[]{name, prev});
+        UtilsDB.closeConnection(db);
     }
 
     public void delete(String name){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("DELETE FROM type_event WHERE name = ?", new Object[]{name});
+        UtilsDB.closeConnection(db);
     }
 
     public void deleteAll(){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("DELETE FROM type_event");
+        UtilsDB.closeConnection(db);
     }
 }
