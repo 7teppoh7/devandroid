@@ -27,7 +27,6 @@ public class MainActivity extends ParentNavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UtilsDB.context = this;
-        SQLiteDatabase db = this.openOrCreateDatabase("shelter.db", MODE_PRIVATE, null);
         UtilsDB.deleteAll();
         UtilsDB.doMigrate();
     }
