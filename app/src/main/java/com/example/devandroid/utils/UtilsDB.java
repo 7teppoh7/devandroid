@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi;
 
 import com.example.devandroid.entities.Aviary;
 import com.example.devandroid.entities.Dog;
+import com.example.devandroid.entities.Event;
 import com.example.devandroid.entities.TypeAviary;
 import com.example.devandroid.entities.TypeEvent;
 import com.example.devandroid.services.AviaryService;
@@ -18,6 +19,7 @@ import com.example.devandroid.services.TypeAviaryService;
 import com.example.devandroid.services.TypeEventService;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -106,7 +108,8 @@ public class UtilsDB {
         AviaryService aviaryService = new AviaryService();
         String date = UtilsCalendar.getTestExample();
 
-        typeEventService.add("Event");
+        typeEventService.add("Out");
+        typeEventService.add("In");
 
         typeAviaryService.add("Aggressive");
         typeAviaryService.add("Patient");
@@ -117,15 +120,22 @@ public class UtilsDB {
         Aviary aviary = new Aviary(typeAviaryService.getFirstElement(), "AV1", 20);
         aviaryService.add(aviary);
 
-        Dog dog = new Dog("Bob", "photo", 3, date, date);
+        Dog dog = new Dog("Бобик", "photo", 3, date, date);
         dog.setState(stateAnimalService.getFirstElement());
         dogService.add(dog);
         System.out.println(aviary);
 
         aviaryService.addDog(aviary, dog);
 
-        System.out.println(aviary);
-        System.out.println(dog);
+        Event event1 = new Event(new TypeEvent("Out"), dogService.getLastElement(), UtilsCalendar.parser.format(new Date()));
+        eventService.add(event1);
+
+        Dog dog2 = new Dog("Лайка", "photo", 5, date, date);
+        dog2.setState(stateAnimalService.getFirstElement());
+        dogService.add(dog2);
+
+        Event event2 = new Event(new TypeEvent("In"), dogService.getLastElement(), UtilsCalendar.parser.format(new Date()));
+        eventService.add(event2);
         closeConnection(db);
     }
 }
