@@ -1,14 +1,13 @@
 package com.example.devandroid.entities;
 
 public class Dog {
-    int id;
-    StateAnimal state;
-    Aviary aviary;
-    String name;
-    String photo;
-    int age;
-    String dateIn;
-    String dateOut;
+    private int id;
+    private StateAnimal state;
+    private String name;
+    private String photo;
+    private int age;
+    private String dateIn;
+    private String dateOut;
 
     public Dog(){}
 
@@ -27,10 +26,9 @@ public class Dog {
         this.age = age;
     }
 
-    public Dog(int id, StateAnimal state, Aviary aviary, String name, String photo, int age, String dateIn, String dateOut) {
+    public Dog(int id, StateAnimal state, String name, String photo, int age, String dateIn, String dateOut) {
         this.id = id;
         this.state = state;
-        this.aviary = aviary;
         this.name = name;
         this.photo = photo;
         this.age = age;
@@ -52,14 +50,6 @@ public class Dog {
 
     public void setState(StateAnimal state) {
         this.state = state;
-    }
-
-    public Aviary getAviary() {
-        return aviary;
-    }
-
-    public void setAviary(Aviary aviary) {
-        this.aviary = aviary;
     }
 
     public String getName() {
@@ -107,7 +97,6 @@ public class Dog {
         return "Dog{" +
                 "id=" + id +
                 ", state=" + state +
-                ", aviary=" + aviary +
                 ", name='" + name + '\'' +
                 ", photo='" + photo + '\'' +
                 ", age=" + age +

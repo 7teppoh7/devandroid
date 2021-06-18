@@ -12,7 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TypeEventService {
-    public List<TypeEvent> getAll(SQLiteDatabase db){
+    private SQLiteDatabase db;
+
+    public TypeEventService(SQLiteDatabase db) {
+        this.db = db;
+    }
+
+    public List<TypeEvent> getAll(){
         List<TypeEvent> list = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM type_event", null);
         cursor.moveToFirst();
@@ -26,25 +32,25 @@ public class TypeEventService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public TypeEvent getByName(SQLiteDatabase db, String name){
-        return getAll(db).stream()
+    public TypeEvent getByName(String name){
+        return getAll().stream()
                 .filter(x -> x.getName().equals(name)).findFirst()
                 .orElse(null);
     }
 
-    public void add(SQLiteDatabase db, String name){
+    public void add(String name){
         db.execSQL("INSERT INTO type_event VALUES (?)", new Object[]{name});
     }
 
-    public void update(SQLiteDatabase db, String prev, String name){
+    public void update(String prev, String name){
         db.execSQL("UPDATE type_event SET name = ? WHERE name = ?", new Object[]{name, prev});
     }
 
-    public void delete(SQLiteDatabase db, String name){
+    public void delete(String name){
         db.execSQL("DELETE FROM type_event WHERE name = ?", new Object[]{name});
     }
 
-    public void deleteAll(SQLiteDatabase db){
+    public void deleteAll(){
         db.execSQL("DELETE FROM type_event");
     }
 }

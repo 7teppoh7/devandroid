@@ -1,10 +1,10 @@
 package com.example.devandroid.entities;
 
 public class Event {
-    int id;
-    TypeEvent type;
-    Dog dog;
-    String date;
+    private int id;
+    private TypeEvent type;
+    private Dog dog;
+    private String date;
 
     public Event(){}
 

@@ -21,10 +21,16 @@ import java.util.List;
 import java.util.Locale;
 
 public class EventService {
+    private SQLiteDatabase db;
+
+    public EventService(SQLiteDatabase db) {
+        this.db = db;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public List<Event> getAll(SQLiteDatabase db) throws ParseException {
-        TypeEventService service = new TypeEventService();
-        DogService dogService = new DogService();
+    public List<Event> getAll() throws ParseException {
+        TypeEventService service = new TypeEventService(db);
+        DogService dogService = new DogService(db);
         List<Event> events = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM event", null);
         cursor.moveToFirst();
@@ -36,8 +42,8 @@ public class EventService {
             Date date = UtilsCalendar.parser.parse(dateFromDb);
             Event event = new Event();
             event.setId(id);
-            event.setType(service.getByName(db, type));
-            event.setDog(dogService.getById(db, dog));
+            event.setType(service.getByName(type));
+            event.setDog(dogService.getById(dog));
             event.setDate(UtilsCalendar.formatter.format(date));
             events.add(event);
             cursor.moveToNext();
@@ -46,21 +52,21 @@ public class EventService {
         return events;
     }
 
-    public void add(SQLiteDatabase db, Event event){
+    public void add(Event event){
         db.execSQL("INSERT INTO event VALUES (?,?,?,?)", new Object[]{null,event.getType().getName(), event.getDog().getId(),
                 event.getDate()});
     }
 
-    public void update(SQLiteDatabase db, Event event){
+    public void update(Event event){
         db.execSQL("UPDATE event SET type_event = ?, id_dog = ?, date = ? WHERE id = ?",
                 new Object[]{event.getType().getName(), event.getDog().getId(), event.getDate(), event.getId()});
     }
 
-    public void delete(SQLiteDatabase db, Event event){
+    public void delete(Event event){
         db.execSQL("DELETE FROM event WHERE id = ?", new Object[]{event.getId()});
     }
 
-    public void deleteAll(SQLiteDatabase db){
+    public void deleteAll(){
         db.execSQL("DELETE FROM event");
     }
 }

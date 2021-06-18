@@ -14,7 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StateAnimalService {
-    public List<StateAnimal> getAll(SQLiteDatabase db){
+    private SQLiteDatabase db;
+
+    public StateAnimalService(SQLiteDatabase db) {
+        this.db = db;
+    }
+
+    public List<StateAnimal> getAll(){
         List<StateAnimal> list = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM state_animal", null);
         cursor.moveToFirst();
@@ -28,25 +34,32 @@ public class StateAnimalService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public StateAnimal getByName(SQLiteDatabase db, String name){
-        return getAll(db).stream()
+    public StateAnimal getByName(String name){
+        return getAll().stream()
                 .filter(x -> x.getName().equals(name)).findFirst()
                 .orElse(null);
     }
 
-    public void add(SQLiteDatabase db, String name){
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public StateAnimal getFirstElement(){
+        return getAll().stream()
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void add(String name){
         db.execSQL("INSERT INTO state_animal VALUES (?)", new Object[]{name});
     }
 
-    public void update(SQLiteDatabase db, String prev, String name){
+    public void update(String prev, String name){
         db.execSQL("UPDATE state_animal SET name = ? WHERE name = ?", new Object[]{name, prev});
     }
 
-    public void delete(SQLiteDatabase db, String name){
+    public void delete(String name){
         db.execSQL("DELETE FROM state_animal WHERE name = ?", new Object[]{name});
     }
 
-    public void deleteAll(SQLiteDatabase db){
+    public void deleteAll(){
         db.execSQL("DELETE FROM state_animal");
     }
 }

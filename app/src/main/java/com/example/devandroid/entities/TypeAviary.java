@@ -1,7 +1,7 @@
 package com.example.devandroid.entities;
 
 public class TypeAviary{
-    String name;
+    private String name;
 
     public TypeAviary(String name) {
         this.name = name;
