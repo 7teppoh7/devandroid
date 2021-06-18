@@ -14,4 +14,14 @@
     <string name="go_home_example">Забрали: 10 мая 2021</string>
     <string name="state_example">Состояние: у хозяев</string>
     <string name="filters_btn_txt">Фильтры</string>
+    <string name="delete">Удалить</string>
+    <string name="txt_name">Кличка</string>
+    <string name="pet_age">Возраст</string>
+    <string name="getIn_txt">Поступил</string>
+    <string name="getOut">Забрали</string>
+    <string name="txt_tale">Забрать</string>
+    <string name="state_txt">Состояние</string>
+    <string name="save_txt">Сохранить</string>
+    <string name="cancel_txt">Отмена</string>
+    <string name="back_txt">Назад ко списку</string>
 </resources>
