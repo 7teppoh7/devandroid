@@ -24,9 +24,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class UtilsDB {
     public static Context context;
 
-    public static void initDb(Context context){
+    public static void initDb(){
         SQLiteDatabase db = openConnection();
-        db = context.openOrCreateDatabase("shelter.db", MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS state_animal (name TEXT PRIMARY KEY NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS type_aviary (name TEXT PRIMARY KEY NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS type_event (name TEXT PRIMARY KEY NOT NULL)");
@@ -121,6 +120,9 @@ public class UtilsDB {
         Dog dog = new Dog("Bob", "photo", 3, date, date);
         dog.setState(stateAnimalService.getFirstElement());
         dogService.add(dog);
+        System.out.println(aviary);
+
+        aviaryService.addDog(aviary, dog);
 
         System.out.println(aviary);
         System.out.println(dog);
