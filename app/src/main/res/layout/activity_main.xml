@@ -27,61 +27,56 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:background="#E6E8E6">
 
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/news_scroll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/news_scroll"
+                    android:id="@+id/item_example"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <LinearLayout
-                        android:id="@+id/item_example"
+                        android:id="@+id/inner_item_example"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:id="@+id/inner_item_example"
+                        <TextView
+                            android:id="@+id/date_example"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/date_txt_example"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/date_size_news"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/text_example"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/date_example"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="5dp"
-                                android:text="@string/date_txt_example"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/date_size_news"
-                                android:textStyle="italic" />
-
-                            <TextView
-                                android:id="@+id/text_example"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/text_example"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/text_size_news" />
-                        </LinearLayout>
-
+                            android:text="@string/text_example"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_news" />
                     </LinearLayout>
+
                 </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <!--menu-->

@@ -88,7 +88,7 @@ public class MainActivity extends ParentNavigationActivity {
                 body = "В наш приют была принята собака по имени " + dogFromEvent.getName() + " Она находится в вольере " + aviaryService.findByDog(dogFromEvent).getName();
                 break;
             case "Out":
-                body = "В добрые руки была передана собака по имени " + dogFromEvent.getName() + ". Желаем ей удачи с новыми хозяином!";
+                body = "В добрые руки была передана собака по имени " + dogFromEvent.getName() + ". Желаем ей удачи с новым хозяином!";
                 break;
         }
         return body;

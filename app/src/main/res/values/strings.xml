@@ -6,4 +6,12 @@
     <string name="header_news">События</string>
     <string name="date_txt_example">10 мая 2021 года</string>
     <string name="text_example">В наш приют была принята собака по имени Лайка. Она находится в вольере под номером 5.</string>
+    <string name="pets_header">Наши жильцы</string>
+    <string name="btn_news">События</string>
+    <string name="pet_name_example">Репер Хаски</string>
+    <string name="age_example">Возраст: 5 лет</string>
+    <string name="arrive_example">Прибыл: 10 декабря 2020 года</string>
+    <string name="go_home_example">Забрали: 10 мая 2021</string>
+    <string name="state_example">Состояние: у хозяев</string>
+    <string name="filters_btn_txt">Фильтры</string>
 </resources>
