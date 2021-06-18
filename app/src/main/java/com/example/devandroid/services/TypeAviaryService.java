@@ -8,18 +8,14 @@ import androidx.annotation.RequiresApi;
 
 import com.example.devandroid.entities.StateAnimal;
 import com.example.devandroid.entities.TypeAviary;
+import com.example.devandroid.utils.UtilsDB;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TypeAviaryService {
-    private SQLiteDatabase db;
-
-    public TypeAviaryService(SQLiteDatabase db) {
-        this.db = db;
-    }
-
     public List<TypeAviary> getAll(){
+        SQLiteDatabase db = UtilsDB.openConnection();
         List<TypeAviary> list = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM type_aviary", null);
         cursor.moveToFirst();
@@ -29,6 +25,7 @@ public class TypeAviaryService {
             cursor.moveToNext();
         }
         cursor.close();
+        UtilsDB.closeConnection(db);
         return list;
     }
 
@@ -47,18 +44,26 @@ public class TypeAviaryService {
     }
 
     public void add(String name){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("INSERT INTO type_aviary VALUES (?)", new Object[]{name});
+        UtilsDB.closeConnection(db);
     }
 
     public void update(String prev, String name){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("UPDATE type_aviary SET name = ? WHERE name = ?", new Object[]{name, prev});
+        UtilsDB.closeConnection(db);
     }
 
     public void delete(String name){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("DELETE FROM type_aviary WHERE name = ?", new Object[]{name});
+        UtilsDB.closeConnection(db);
     }
 
     public void deleteAll(){
+        SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("DELETE FROM type_aviary");
+        UtilsDB.closeConnection(db);
     }
 }

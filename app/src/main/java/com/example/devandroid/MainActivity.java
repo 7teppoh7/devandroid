@@ -32,12 +32,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UtilsDB.context = this;
         SQLiteDatabase db = this.openOrCreateDatabase("shelter.db", MODE_PRIVATE, null);
-        UtilsDB.deleteAll(this);
-        try {
-            UtilsDB.doMigrate(this);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        UtilsDB.deleteAll();
+        UtilsDB.doMigrate();
     }
 }
