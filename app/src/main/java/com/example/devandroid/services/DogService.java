@@ -24,7 +24,7 @@ public class DogService {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<Dog> getAll() {
         SQLiteDatabase db = UtilsDB.openConnection();
-        StateAnimalService service = new StateAnimalService(db);
+        StateAnimalService service = new StateAnimalService();
         List<Dog> dogs = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM dogs", null);
         cursor.moveToFirst();
