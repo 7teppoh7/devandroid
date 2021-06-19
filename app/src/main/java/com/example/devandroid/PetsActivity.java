@@ -1,25 +1,32 @@
 package com.example.devandroid;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Picture;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.devandroid.entities.Aviary;
 import com.example.devandroid.entities.Dog;
 import com.example.devandroid.services.AviaryService;
 import com.example.devandroid.services.DogService;
+import com.example.devandroid.utils.Updatable;
 import com.example.devandroid.utils.UtilsCalendar;
+import com.example.devandroid.utils.UtilsModerator;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-public class PetsActivity extends ParentNavigationActivity {
+public class PetsActivity extends ParentNavigationActivity implements Updatable {
 
     private DogService dogService = new DogService();
     private AviaryService aviaryService = new AviaryService();
@@ -29,9 +36,36 @@ public class PetsActivity extends ParentNavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pets_activity);
+        UtilsModerator.activity = this;
 
         initDogs();
         findViewById(R.id.btn_filter).setOnClickListener(View -> openFilterDialog());
+        update();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void update(){
+        Bundle bundle = this.getIntent().getExtras();
+        TextView header = (TextView) findViewById(R.id.pets_header);
+        Button add = (Button) findViewById(R.id.add_pet);
+        if (bundle != null){
+            add.setVisibility(View.GONE);
+            Aviary aviary = aviaryService.getById(bundle.getInt("id"));
+            header.setText(aviary.getName());
+        }else{
+            if (UtilsModerator.isModerator){
+                add.setVisibility(View.VISIBLE);
+            }else{
+                add.setVisibility(View.GONE);
+            }
+            header.setText("Наши жильцы");
+        }
+    }
+
+    public void addPet(View view){
+        Intent intent = new Intent(this, PetActivity.class);
+        this.startActivity(intent);
+        this.finish();
     }
 
     private void openFilterDialog() {
@@ -39,11 +73,19 @@ public class PetsActivity extends ParentNavigationActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initDogs() {
-        List<Dog> dogs = dogService.getAll();
+        Bundle bundle = this.getIntent().getExtras();
+        List<Dog> dogs;
+        if (bundle != null){
+            Aviary aviary = aviaryService.getById(bundle.getInt("id"));
+            dogs = aviary.getDogs();
+        }else{
+            dogs = dogService.getAll();
+        }
         dogs.forEach(this::visualizeEvent);
     }
 
     private void visualizeEvent(Dog dog) {
+        if (dog == null) return;
         LinearLayout itemExample = findViewById(R.id.item_example_pets);
         LinearLayout item = new LinearLayout(this);
         item.setLayoutParams(itemExample.getLayoutParams());
@@ -125,7 +167,6 @@ public class PetsActivity extends ParentNavigationActivity {
         dateOut.setTextSize(15f); //todo resources
         dateOut.setTypeface(dateOutExample.getTypeface());
 
-
         innerItem.addView(name);
         innerItem.addView(age);
         innerItem.addView(dateIn);
@@ -134,6 +175,13 @@ public class PetsActivity extends ParentNavigationActivity {
         item.addView(photo);
         item.addView(innerItem);
         ((LinearLayout) findViewById(R.id.pets_scroll)).addView(item);
-        //todo onclick listener
+        item.setOnClickListener((View) -> openPetActivity(dog));
+    }
+
+    public void openPetActivity(Dog pet){
+        Intent intent = new Intent(this, PetActivity.class);
+        intent.putExtra("id", pet.getId());
+        this.startActivity(intent);
+        this.finish();
     }
 }

@@ -14,4 +14,26 @@
     <string name="go_home_example">Забрали: 10 мая 2021</string>
     <string name="state_example">Состояние: у хозяев</string>
     <string name="filters_btn_txt">Фильтры</string>
+    <string name="delete">Удалить</string>
+    <string name="txt_name">Кличка</string>
+    <string name="pet_age">Возраст</string>
+    <string name="getIn_txt">Поступил</string>
+    <string name="getOut">Забрали</string>
+    <string name="txt_tale">Забрать</string>
+    <string name="state_txt">Состояние</string>
+    <string name="aviary_txt">Вольер</string>
+    <string name="add_pet">Заселить питомца</string>
+    <string name="save_txt">Сохранить</string>
+    <string name="cancel_txt">Отмена</string>
+    <string name="back_txt">Назад ко списку</string>
+    <string name="header_moderator_switch">Режим модератора</string>
+    <string name="header_aviary_example">Вольер</string>
+    <string name="capacity_aviary_example">Загруженность вольера 5 из 20</string>
+    <string name="type_aviary_example">Предназначен для агрессивных собак</string>
+    <string name="aviary_header">Вольеры</string>
+    <string name="add_aviary_text">Добавить вольер</string>
+    <string name="aviary_name">Название</string>
+    <string name="aviary_current">Количество</string>
+    <string name="aviary_type">Тип животных</string>
+    <string name="change">редактировать</string>
 </resources>
