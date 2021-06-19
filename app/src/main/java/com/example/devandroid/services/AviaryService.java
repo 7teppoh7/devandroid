@@ -62,6 +62,15 @@ public class AviaryService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
+    public Aviary getByName(String name){
+        List<Aviary> aviaries = getAll();
+        return aviaries.stream()
+                .filter(x -> x.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public Aviary getLastElement() {
         List<Aviary> aviaries = getAll();
         return aviaries.get(aviaries.size() - 1);

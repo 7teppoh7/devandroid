@@ -15,35 +15,26 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/pets_header"
+                android:id="@+id/aviary_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/pets_header"
+                android:text="@string/aviary_header"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_filter"
+            android:onClick="addAviary"
+            android:id="@+id/add_aviary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/teal_700"
-            android:textColor="@color/white"
-            android:text="@string/filters_btn_txt" />
-
-        <Button
-            android:onClick="addPet"
-            android:id="@+id/add_pet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#51C133"
-            android:text="@string/add_pet"
-            android:textColor="#FFFFFF"
-            android:visibility="gone" />
+            android:backgroundTint="#3EAC49"
+            android:text="@string/add_aviary_text"
+            android:textColor="#FFFFFF" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -51,13 +42,13 @@
             android:background="#E6E8E6">
 
             <LinearLayout
-                android:id="@+id/pets_scroll"
+                android:id="@+id/aviaries_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/item_example_pets"
+                    android:id="@+id/item_example"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -66,64 +57,44 @@
                     android:orientation="horizontal"
                     android:visibility="gone">
 
-                    <ImageView
-                        android:id="@+id/photo_example"
-                        android:layout_width="125dp"
-                        android:layout_height="125dp"
-                        android:layout_margin="15dp"
-                        android:src="@drawable/example" />
-
                     <LinearLayout
-                        android:id="@+id/pets_description_example"
+                        android:id="@+id/inner_item_example"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/pet_name_example"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pet_name_example"
+                            android:id="@+id/header_aviary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/header_aviary_example"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:layout_weight="2"/>
+                            android:textSize="@dimen/date_size_news"
+                            android:textStyle="italic" />
 
                         <TextView
-                            android:id="@+id/pet_age_example"
+                            android:id="@+id/capacity_aviary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/age_example"
+                            android:text="@string/text_example"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:layout_weight="1"/>
+                            android:textSize="@dimen/text_size_news" />
 
                         <TextView
-                            android:id="@+id/pet_in_example"
+                            android:id="@+id/type_aviary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/arrive_example"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:layout_weight="1"/>
+                            android:text="TextView" />
 
-                        <TextView
-                            android:id="@+id/pet_state_example"
+                        <Button
+                            android:id="@+id/change_example"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/state_example"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:layout_weight="1"/>
-
-                        <TextView
-                            android:id="@+id/pet_out_example"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/go_home_example"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:layout_weight="1"/>
+                            android:backgroundTint="#3EAC49"
+                            android:text="@string/change"
+                            android:textColor="#FFFFFF" />
                     </LinearLayout>
 
                 </LinearLayout>

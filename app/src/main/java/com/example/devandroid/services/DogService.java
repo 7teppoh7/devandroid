@@ -84,7 +84,7 @@ public class DogService {
         SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("UPDATE dogs SET state = ?, name = ?, photo = ?, age = ?, date_in = ?, date_out = ?  WHERE id = ?",
                 new Object[]{dog.getState().getName(), dog.getName(),
-                        dog.getPhoto(), dog.getAge(), dog.getDateIn(), dog.getDateOut()});
+                        dog.getPhoto(), dog.getAge(), dog.getDateIn(), dog.getDateOut(), dog.getId()});
         UtilsDB.closeConnection(db);
     }
 
