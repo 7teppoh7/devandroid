@@ -24,16 +24,16 @@
                 android:visibility="invisible" />
 
             <Button
-                android:onClick="deletePet"
                 android:id="@+id/btn_delete_pet"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@android:color/holo_red_dark"
+                android:onClick="deletePet"
                 android:text="@string/delete"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
 
         <ImageView
@@ -54,21 +54,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:backgroundTint="#51C133"
                 android:text="@string/change_photo"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:layout_weight="1"/>
+                android:textColor="@color/white" />
+
             <Button
                 android:id="@+id/btn_delete_image"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:text="@string/delete_photo"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:layout_weight="1"/>
+                android:textColor="@color/white" />
         </LinearLayout>
 
 
@@ -86,8 +87,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -116,8 +117,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -150,8 +151,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -169,6 +170,7 @@
                         android:layout_height="wrap_content"
                         android:autofillHints="кличка"
                         android:cursorVisible="false"
+                        android:editable="false"
                         android:ems="10"
                         android:inputType="none"
                         android:onClick="inDate"
@@ -176,7 +178,6 @@
                         android:textColorHighlight="@color/black"
                         android:textColorLink="@color/black"
                         android:textIsSelectable="true"
-                        android:editable="false"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -184,8 +185,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -197,57 +198,63 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:onClick="outDate"
                         android:id="@+id/edit_pet_out"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autofillHints="забрали"
+                        android:cursorVisible="false"
+                        android:editable="false"
                         android:ems="10"
                         android:inputType="none"
                         android:textColor="@color/black"
                         android:textColorHighlight="@color/black"
                         android:textColorLink="@color/black"
                         android:textIsSelectable="true"
-                        android:cursorVisible="false"
-                        android:editable="false"
                         android:textSize="20sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/aviary_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:text="@string/aviary_txt"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/spinner_aviary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbarSize="4sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/aviary_txt"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner_aviary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbarSize="4sp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_take"
-                android:backgroundTint="@color/teal_700"
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:backgroundTint="@color/teal_700"
                 android:onClick="takePet"
-                android:text="@string/txt_tale" />
+                android:text="@string/txt_tale"
+                android:textColor="@color/white" />
 
 
             <Button
-                android:onClick="backToPets"
                 android:id="@+id/back_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@color/teal_700"
+                android:onClick="backToPets"
                 android:text="@string/back_txt"
                 android:textColor="@color/white" />
 
@@ -260,13 +267,13 @@
                 android:visibility="gone">
 
                 <Button
-                    android:onClick="savePet"
                     android:id="@+id/btn_pet_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="#51C133"
+                    android:onClick="savePet"
                     android:text="@string/save_txt"
                     android:textColor="@color/white" />
 

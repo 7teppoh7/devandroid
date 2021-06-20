@@ -94,13 +94,11 @@ public class AviaryActivity extends ParentNavigationActivity implements Updatabl
         EditText name = (EditText) findViewById(R.id.edit_aviary_name);
         EditText capacity = (EditText) findViewById(R.id.edit_aviary_capacity);
         Button delete = (Button) findViewById(R.id.btn_delete_aviary);
-        Button back = (Button) findViewById(R.id.back_button);
         LinearLayout editLayout = (LinearLayout) findViewById(R.id.edit_aviary_layout);
 
         if (UtilsModerator.isModerator){
             name.setVisibility(View.VISIBLE);
             capacity.setVisibility(View.VISIBLE);
-            back.setVisibility(View.GONE);
             editLayout.setVisibility(View.VISIBLE);
             if (bundle != null){
                 delete.setVisibility(View.VISIBLE);
@@ -109,7 +107,6 @@ public class AviaryActivity extends ParentNavigationActivity implements Updatabl
             }
         }else{
             delete.setVisibility(View.GONE);
-            back.setVisibility(View.VISIBLE);
             editLayout.setVisibility(View.GONE);
             name.setVisibility(View.GONE);
             capacity.setVisibility(View.GONE);

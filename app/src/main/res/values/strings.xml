@@ -38,4 +38,5 @@
     <string name="change">редактировать</string>
     <string name="change_photo">Изменить фото</string>
     <string name="delete_photo">Удалить фото</string>
+    <string name="exit">Выход</string>
 </resources>

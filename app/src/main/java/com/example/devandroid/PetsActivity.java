@@ -158,7 +158,6 @@ public class PetsActivity extends ParentNavigationActivity implements Updatable 
         if (dog.getState().getName().equals("Home")) {
             text = "Забрали: " + UtilsCalendar.formatForNews(dog.getDateOut());
         } else {
-            //text = "Номер вольера: " + aviaryService.findByDog(dog).getName();
             text = "Номер вольера: " + aviaryService.getByDog(dog).getName();
         }
         dateOut.setText(text);

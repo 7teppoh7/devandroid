@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,6 +42,7 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class PetActivity extends ParentNavigationActivity implements Updatable {
@@ -113,6 +115,9 @@ public class PetActivity extends ParentNavigationActivity implements Updatable {
             in.setText(dog.getDateIn());
             out.setText(dog.getDateOut());
             currentPhoto = dog.getPhoto();
+            if (!TextUtils.isEmpty(dog.getDateOut())){
+                findViewById(R.id.aviary_layout).setVisibility(View.GONE);
+            }
             adapter.clear();
             if (UtilsModerator.isModerator) {
                 adapter.addAll(array);
@@ -194,32 +199,35 @@ public class PetActivity extends ParentNavigationActivity implements Updatable {
             dog.setDateOut(null);
         }
 
-        Aviary aviary = aviaryService.getByName(aviaryName);
+        if (!TextUtils.isEmpty(aviaryName)) {
+            Aviary aviary = aviaryService.getByName(aviaryName);
 
-        if (bundle != null && bundle.containsKey("id")) {
-            dogService.update(dog);
-            Toast.makeText(this, "Изменения успешно сохранены", Toast.LENGTH_SHORT).show();
-        } else {
-            if (aviary.isFull()) {
-                Toast.makeText(this, "Вольер в который вы хотите добавить собаку, заполнен, выберите другой"
-                        , Toast.LENGTH_LONG).show();
-                return;
-            }
-            dogService.add(dog);
 
-            Event event = new Event();
-            event.setType(typeEventService.getByName("In"));
-            event.setDog(dog);
-            try {
-                event.setDate(UtilsCalendar.parser.parse(in.getText().toString()).toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (bundle != null && bundle.containsKey("id")) {
+                dogService.update(dog);
+                Toast.makeText(this, "Изменения успешно сохранены", Toast.LENGTH_SHORT).show();
+            } else {
+                if (aviary.isFull()) {
+                    Toast.makeText(this, "Вольер в который вы хотите добавить собаку, заполнен, выберите другой"
+                            , Toast.LENGTH_LONG).show();
+                    return;
+                }
+                dogService.add(dog);
+
+                Event event = new Event();
+                event.setType(typeEventService.getByName("In"));
+                event.setDate(UtilsCalendar.parser.format(Calendar.getInstance().getTime()));
+                event.setDog(dog);
+                try {
+                    event.setDate(UtilsCalendar.parser.parse(in.getText().toString()).toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                eventService.add(event);
             }
-            eventService.add(event);
+
+            aviaryService.rewriteDog(aviary, dog);
         }
-
-        aviaryService.rewriteDog(aviary, dog);
-
         Intent intent = new Intent(this, PetsActivity.class);
         if (bundle != null && bundle.containsKey("aviary")) {
             intent.putExtra("id", bundle.getInt("aviary"));
@@ -257,7 +265,6 @@ public class PetActivity extends ParentNavigationActivity implements Updatable {
                 delete.setVisibility(View.GONE);
             }
             in.setOnClickListener((View) -> inDate(in));
-            out.setOnClickListener((View) -> outDate(out));
             changePhoto.setOnClickListener(View -> changePhoto());
             deletePhoto.setOnClickListener(View -> deletePhoto());
         } else {
@@ -286,7 +293,7 @@ public class PetActivity extends ParentNavigationActivity implements Updatable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (dog.getDateOut() != null) {
+            if (!TextUtils.isEmpty(dog.getDateOut())) {
                 take.setVisibility(View.GONE);
             } else {
                 take.setVisibility(View.VISIBLE);
@@ -339,23 +346,17 @@ public class PetActivity extends ParentNavigationActivity implements Updatable {
         Bundle bundle = this.getIntent().getExtras();
         Dog dog = dogService.getById(bundle.getInt("id"));
         EditText out = (EditText) findViewById(R.id.edit_pet_out);
-        try {
-            dog.setDateOut(UtilsCalendar.parser.parse(out.getText().toString()).toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        dog.setDateOut(UtilsCalendar.parser.format(Calendar.getInstance().getTime()));
 
         dog.setState(stateAnimalService.getByName("Home"));
         dogService.update(dog);
         Event event = new Event();
         event.setDog(dog);
         event.setType(typeEventService.getByName("Out"));
-        try {
-            event.setDate(UtilsCalendar.parser.parse(out.getText().toString()).toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        event.setDate(UtilsCalendar.parser.format(Calendar.getInstance().getTime()));
         eventService.add(event);
+        aviaryService.deleteDog(aviaryService.findByDog(dog), dog);
+        List<Aviary> aviaryList = aviaryService.getAll();
         Intent intent = new Intent(this, PetsActivity.class);
         this.startActivity(intent);
         this.finish();

@@ -20,16 +20,6 @@
         android:layout_height="wrap_content"
         android:text="@string/header_moderator_switch" />
 
-    <Button
-        android:id="@+id/btn_contacts"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textAllCaps="false"
-        android:text="@string/btn_contacts_txt"
-        android:backgroundTint="@color/teal_700"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="25sp"/>
 
     <Button
         android:id="@+id/btn_news"
@@ -63,5 +53,17 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textAllCaps="false"
+        android:text="@string/exit"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:layout_gravity="bottom"/>
 
 </LinearLayout>
