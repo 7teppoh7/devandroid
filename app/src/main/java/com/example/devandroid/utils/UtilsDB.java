@@ -132,7 +132,7 @@ public class UtilsDB {
 
         aviaryService.addDog(aviary, dog);
 
-        Event event1 = new Event(new TypeEvent("Out"), dogService.getLastElement(), UtilsCalendar.parser.format(new Date()));
+        Event event1 = new Event(typeEventService.getByName("Out"), dogService.getLastElement(), UtilsCalendar.parser.format(new Date()));
         eventService.add(event1);
 
         Dog dog2 = new Dog("Лайка", base64photo, 5, date, null);
@@ -140,7 +140,7 @@ public class UtilsDB {
         dogService.add(dog2);
         aviaryService.addDog(aviary1, dog2);
 
-        Event event2 = new Event(new TypeEvent("In"), dogService.getLastElement(), UtilsCalendar.parser.format(new Date()));
+        Event event2 = new Event(typeEventService.getByName("In"), dogService.getLastElement(), UtilsCalendar.parser.format(new Date()));
         eventService.add(event2);
         closeConnection(db);
     }

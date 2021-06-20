@@ -1,7 +1,13 @@
 package com.example.devandroid.entities;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Aviary {
     private int id;
@@ -24,6 +30,18 @@ public class Aviary {
         this.type = type;
         this.name = name;
         this.capacity = capacity;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public List<Dog> getShelterDogs(){
+        return dogs.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public boolean isFull(){
+        return getShelterDogs().size() == capacity;
     }
 
     public void addDog(Dog dog){

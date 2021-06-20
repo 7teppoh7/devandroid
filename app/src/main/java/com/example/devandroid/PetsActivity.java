@@ -84,6 +84,7 @@ public class PetsActivity extends ParentNavigationActivity implements Updatable 
         dogs.forEach(this::visualizeEvent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void visualizeEvent(Dog dog) {
         if (dog == null) return;
         LinearLayout itemExample = findViewById(R.id.item_example_pets);
@@ -161,7 +162,8 @@ public class PetsActivity extends ParentNavigationActivity implements Updatable 
         if (dog.getState().getName().equals("Home")) {
             text = "Забрали: " + UtilsCalendar.formatForNews(dog.getDateOut());
         } else {
-            text = "Номер вольера: " + aviaryService.findByDog(dog).getName();
+            //text = "Номер вольера: " + aviaryService.findByDog(dog).getName();
+            text = "Номер вольера: " + aviaryService.getByDog(dog).getName();
         }
         dateOut.setText(text);
         dateOut.setTextSize(15f); //todo resources
@@ -179,8 +181,12 @@ public class PetsActivity extends ParentNavigationActivity implements Updatable 
     }
 
     public void openPetActivity(Dog pet){
+        Bundle bundle = this.getIntent().getExtras();
         Intent intent = new Intent(this, PetActivity.class);
         intent.putExtra("id", pet.getId());
+        if (bundle != null && bundle.containsKey("id")){
+            intent.putExtra("aviary", bundle.getInt("id"));
+        }
         this.startActivity(intent);
         this.finish();
     }

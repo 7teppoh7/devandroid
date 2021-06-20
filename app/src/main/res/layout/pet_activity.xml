@@ -185,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:onClick="chooseTags"
+                android:onClick="takePet"
                 android:text="@string/txt_tale" />
 
 
