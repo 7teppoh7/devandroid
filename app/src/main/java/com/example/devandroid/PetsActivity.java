@@ -39,7 +39,6 @@ public class PetsActivity extends ParentNavigationActivity implements Updatable 
         UtilsModerator.activity = this;
 
         initDogs();
-        findViewById(R.id.btn_filter).setOnClickListener(View -> openFilterDialog());
         update();
     }
 
@@ -66,9 +65,6 @@ public class PetsActivity extends ParentNavigationActivity implements Updatable 
         Intent intent = new Intent(this, PetActivity.class);
         this.startActivity(intent);
         this.finish();
-    }
-
-    private void openFilterDialog() {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

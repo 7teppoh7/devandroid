@@ -28,14 +28,6 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/teal_700"
-            android:textColor="@color/white"
-            android:text="@string/filters_btn_txt" />
-
-        <Button
             android:onClick="addPet"
             android:id="@+id/add_pet"
             android:layout_width="match_parent"
