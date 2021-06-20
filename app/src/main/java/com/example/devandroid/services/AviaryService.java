@@ -44,6 +44,13 @@ public class AviaryService {
         UtilsDB.closeConnection(db);
     }
 
+    public void rewriteDog(Aviary aviary, Dog dog){
+        SQLiteDatabase db = UtilsDB.openConnection();
+        db.execSQL("DELETE FROM dog_aviary WHERE id_dog = ?", new Object[]{dog.getId()});
+        UtilsDB.closeConnection(db);
+        addDog(aviary, dog);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void deleteDog(Aviary aviary, Dog dog) {
         SQLiteDatabase db = UtilsDB.openConnection();
@@ -101,6 +108,17 @@ public class AviaryService {
         SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("DELETE FROM aviary");
         UtilsDB.closeConnection(db);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Aviary getByDog(Dog dog){
+        SQLiteDatabase db = UtilsDB.openConnection();
+        Cursor cursor = db.rawQuery("SELECT * FROM dog_aviary WHERE id_dog = ?", new String[]{String.valueOf(dog.getId())});
+        cursor.moveToFirst();
+        UtilsDB.closeConnection(db);
+        Aviary aviary = getById(cursor.getInt(1));
+        cursor.close();
+        return aviary;
     }
 
     public Aviary findByDog(Dog dog) {

@@ -25,4 +25,14 @@ public class UtilsCalendar {
         }
         return "10 мая 2021 г.";
     }
+
+    public static String formatForDateOut(String date){
+        try {
+            Date dateOut = parser.parse(date);
+            return formatter.format(dateOut);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "Error";
+    }
 }

@@ -120,6 +120,10 @@ public class AviaryActivity extends ParentNavigationActivity implements Updatabl
     public void deleteAviary(View view) {
         Bundle bundle = this.getIntent().getExtras();
         Aviary aviary = aviaryService.getById(bundle.getInt("id"));
+        if (!aviary.getShelterDogs().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Вы не можете удалить вольер, в нем живут собаки", Toast.LENGTH_SHORT).show();
+            return;
+        }
         aviaryService.delete(aviary);
         Intent intent = new Intent(this, AviariesActivity.class);
         this.startActivity(intent);

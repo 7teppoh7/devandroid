@@ -134,9 +134,10 @@ public class AviariesActivity extends ParentNavigationActivity implements Updata
         this.finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private String formatCapacity(Aviary aviary){
         int capacity = aviary.getCapacity();
-        int current = aviary.getDogs().size();
+        int current = aviary.getShelterDogs().size();
         return "Загруженность вольера : " + current + " из " + capacity;
     }
 

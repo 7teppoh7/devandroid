@@ -28,9 +28,9 @@ public class MainActivity extends ParentNavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UtilsDB.context = this;
-        UtilsDB.dropAll();
+        //UtilsDB.dropAll();
         UtilsDB.initDb();
-        UtilsDB.doMigrate();
+        //UtilsDB.doMigrate();
 
         initNews();
     }
@@ -41,7 +41,9 @@ public class MainActivity extends ParentNavigationActivity {
         events.forEach(this::visualizeEvent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void visualizeEvent(Event event) {
+        if (event.getDog() == null) return;
         LinearLayout itemExample = findViewById(R.id.item_example);
         LinearLayout item = new LinearLayout(this);
         item.setLayoutParams(itemExample.getLayoutParams());
@@ -80,12 +82,13 @@ public class MainActivity extends ParentNavigationActivity {
         //todo onclick listener
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private String formatBody(Event event) {
         String body = "invalid event";
         Dog dogFromEvent = event.getDog();
         switch (event.getType().getName()) {
             case "In":
-                body = "В наш приют была принята собака по имени " + dogFromEvent.getName() + " Она находится в вольере " + aviaryService.findByDog(dogFromEvent).getName();
+                body = "В наш приют была принята собака по имени " + dogFromEvent.getName() + " Она находится в вольере " + aviaryService.getByDog(dogFromEvent).getName();
                 break;
             case "Out":
                 body = "В добрые руки была передана собака по имени " + dogFromEvent.getName() + ". Желаем ей удачи с новым хозяином!";

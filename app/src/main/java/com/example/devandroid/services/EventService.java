@@ -48,6 +48,7 @@ public class EventService {
         return events;
     }
 
+
     public void add(Event event){
         SQLiteDatabase db = UtilsDB.openConnection();
         db.execSQL("INSERT INTO event VALUES (?,?,?,?)", new Object[]{null,event.getType().getName(), event.getDog().getId(),
