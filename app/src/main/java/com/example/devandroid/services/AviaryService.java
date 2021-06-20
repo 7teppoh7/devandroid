@@ -116,7 +116,10 @@ public class AviaryService {
         Cursor cursor = db.rawQuery("SELECT * FROM dog_aviary WHERE id_dog = ?", new String[]{String.valueOf(dog.getId())});
         cursor.moveToFirst();
         UtilsDB.closeConnection(db);
-        Aviary aviary = getById(cursor.getInt(1));
+        Aviary aviary = null;
+        if (cursor.getCount() > 0) {
+            aviary = getById(cursor.getInt(1));
+        }
         cursor.close();
         return aviary;
     }
