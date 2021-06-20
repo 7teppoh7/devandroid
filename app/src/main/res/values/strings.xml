@@ -36,4 +36,6 @@
     <string name="aviary_current">Количество</string>
     <string name="aviary_type">Тип животных</string>
     <string name="change">редактировать</string>
+    <string name="change_photo">Изменить фото</string>
+    <string name="delete_photo">Удалить фото</string>
 </resources>
