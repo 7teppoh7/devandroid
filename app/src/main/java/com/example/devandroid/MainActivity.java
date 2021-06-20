@@ -28,9 +28,9 @@ public class MainActivity extends ParentNavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UtilsDB.context = this;
-        //UtilsDB.dropAll();
+        UtilsDB.dropAll();
         UtilsDB.initDb();
-        //UtilsDB.doMigrate();
+        UtilsDB.doMigrate();
 
         initNews();
     }

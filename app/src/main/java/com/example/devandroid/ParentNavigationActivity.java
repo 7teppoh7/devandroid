@@ -37,6 +37,11 @@ public class ParentNavigationActivity extends AppCompatActivity {
         findViewById(R.id.btn_news).setOnClickListener((View) -> openNewsActivity());
         findViewById(R.id.btn_pets).setOnClickListener((View) -> openPetsActivity());
         findViewById(R.id.btn_aviaries).setOnClickListener((View) -> openAviariesActivity());
+        findViewById(R.id.btn_exit).setOnClickListener((View) -> exit());
+    }
+
+    private void exit() {
+        this.finish();
     }
 
     private void openNewsActivity() {

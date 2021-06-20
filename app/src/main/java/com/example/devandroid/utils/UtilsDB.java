@@ -132,7 +132,7 @@ public class UtilsDB {
         dogService.add(dog);
         System.out.println(aviary);
 
-        aviaryService.addDog(aviary, dog);
+        //aviaryService.addDog(aviary, dog);
 
         Event event1 = new Event(typeEventService.getByName("Out"), dogService.getLastElement(), UtilsCalendar.parser.format(new Date()));
         eventService.add(event1);
